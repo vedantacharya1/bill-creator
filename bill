@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define a structure to represent an item
+struct Item {
+    char name[100];
+    float price;
+    int quantity;
+};
+
+// Function to calculate the total cost for an item
+float calculateItemTotal(struct Item item) {
+    return item.price * item.quantity;
+}
+
+int main() {
+    int numItems;
+    
+    printf("Enter the number of items: ");
+    scanf("%d", &numItems);
+    
+    // Create an array of items
+    struct Item items[numItems];
+    
+    // Input item details
+    for (int i = 0; i < numItems; i++) {
+        printf("Item %d:\n", i + 1);
+        
+        printf("Name: ");
+        scanf("%s", items[i].name);
+        
+        printf("Price: ");
+        scanf("%f", &items[i].price);
+        
+        printf("Quantity: ");
+        scanf("%d", &items[i].quantity);
+    }
+    
+    // Calculate and print the bill
+    printf("\n===== BILL =====\n");
+    printf("Item\tPrice\tQuantity\tTotal\n");
+    float totalAmount = 0;
+    
+    for (int i = 0; i < numItems; i++) {
+        float itemTotal = calculateItemTotal(items[i]);
+        printf("%s\t%.2f\t%d\t\t%.2f\n", items[i].name, items[i].price, items[i].quantity, itemTotal);
+        totalAmount += itemTotal;
+    }
+    
+    printf("\nTotal Amount: %.2f\n", totalAmount);
+    
+    return 0;
+}
